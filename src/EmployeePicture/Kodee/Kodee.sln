@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kodee.AppHost", "Kodee.AppHost\Kodee.AppHost.csproj", "{7FF74AE5-6283-47F9-85A0-BD57A9426169}"
 EndProject
@@ -11,6 +11,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kodee.Web", "Kodee.Web\Kodee.Web.csproj", "{94832F23-4FF3-4B9E-AC35-6A6818D8E293}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kodee.Tests", "Kodee.Tests\Kodee.Tests.csproj", "{ABF3F347-C8F6-46DA-977A-A3E7BB72624B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kodee", "Kodee\Kodee.csproj", "{C6806096-56AB-4F85-A4F7-ADF69CD0336D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{ABF3F347-C8F6-46DA-977A-A3E7BB72624B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABF3F347-C8F6-46DA-977A-A3E7BB72624B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABF3F347-C8F6-46DA-977A-A3E7BB72624B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6806096-56AB-4F85-A4F7-ADF69CD0336D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6806096-56AB-4F85-A4F7-ADF69CD0336D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6806096-56AB-4F85-A4F7-ADF69CD0336D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6806096-56AB-4F85-A4F7-ADF69CD0336D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

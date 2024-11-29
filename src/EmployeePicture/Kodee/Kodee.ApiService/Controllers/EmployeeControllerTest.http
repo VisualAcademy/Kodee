@@ -1,0 +1,3 @@
+### GET Method Test
+
+GET https://localhost:7312/api/Employee

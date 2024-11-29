@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Data</title>
+</head>
+<body>
+    <h1>Employee Data</h1>
+    <ul id="employeeList"></ul>
+
+    <script>
+        fetch('https://localhost:7312/api/Employee')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('employeeList');
+                data.forEach(employee => {
+                    const li = document.createElement('li');
+                    li.textContent = employee;
+                    list.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

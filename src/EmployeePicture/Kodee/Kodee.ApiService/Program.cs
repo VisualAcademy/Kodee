@@ -1,3 +1,6 @@
+using Kodee.ApiService.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
@@ -20,6 +23,11 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<EmployeePhotoDbContext>(options => 
+    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

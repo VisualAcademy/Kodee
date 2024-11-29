@@ -1,3 +1,6 @@
-### GET Method Test
+@HostAddress = https://localhost:7312
 
-GET https://localhost:7312/api/Employee
+GET {{HostAddress}}/api/employee
+Accept: application/json
+
+###

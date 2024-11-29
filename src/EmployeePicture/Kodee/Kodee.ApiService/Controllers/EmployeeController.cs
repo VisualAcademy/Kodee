@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Kodee.ApiService.Models;
+using Kodee.ApiService.ViewModels;
+using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +12,24 @@ namespace Kodee.ApiService.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private readonly EmployeePhotoDbContext _context;
+
+        public EmployeeController(EmployeePhotoDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/Employee
         [HttpGet]
-        public IEnumerable<string> Get()
+        [ProducesResponseType(typeof(IEnumerable<EmployeeViewModel>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "Employee 1", "Employee 2" };
+            var employees = await _context.Employees
+                //.Select(e => new EmployeeViewModel(e.Id, e.FirstName, e.LastName))
+                .ProjectToType<EmployeeViewModel>()
+                .ToListAsync();
+
+            return Ok(employees);
         }
 
         // GET api/<EmployeeController>/5

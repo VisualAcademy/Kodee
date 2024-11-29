@@ -33,15 +33,33 @@ namespace Kodee.ApiService.Controllers
                 .ToListAsync();
 
             return Ok(employees);
-        } 
+        }
         #endregion
 
+        #region GetById
         // GET api/<EmployeeController>/5
+        // 특정 ID의 직원 정보를 조회
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(typeof(EmployeeViewModel), StatusCodes.Status200OK)] // 200: 성공적으로 데이터를 반환
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // 404: 요청한 직원이 없을 경우
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            // 직원 정보 및 관련된 사진 데이터를 포함하여 조회
+            var employee = await _context.Employees
+                .Include(e => e.Photos)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (employee == null)
+            {
+                return NotFound(); // 직원이 없으면 404 반환 
+            }
+
+            //var response = new EmployeeViewModel(employee.Id, employee.FirstName, employee.LastName);
+            var response = employee.Adapt<EmployeeViewModel>();
+
+            return Ok(response); // 직원 데이터를 반환
         }
+        #endregion
 
         // POST api/<EmployeeController>
         [HttpPost]

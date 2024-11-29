@@ -1,6 +1,13 @@
 @HostAddress = https://localhost:7312
 
+### 
+
 GET {{HostAddress}}/api/employee
+Accept: application/json
+
+###
+
+GET {{HostAddress}}/api/employee/1
 Accept: application/json
 
 ###

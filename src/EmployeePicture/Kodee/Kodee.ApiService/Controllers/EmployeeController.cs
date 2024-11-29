@@ -61,11 +61,35 @@ namespace Kodee.ApiService.Controllers
         }
         #endregion
 
+        #region POST
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(EmployeeViewModel), StatusCodes.Status201Created)] // 201: 생성된 리소스를 반환
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] // 400: 잘못된 요청일 경우
+        public async Task<IActionResult> Post([FromBody] EmployeeViewModel value)
         {
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // 유효성 검사 실패 시 400 반환
+            }
+
+            // 요청 데이터를 Employee 엔터티로 변환하여 저장
+            //var employee = new Employee
+            //{
+            //    FirstName = value.FirstName,
+            //    LastName = value.LastName,
+            //};
+            var employee = value.Adapt<Employee>();
+
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+            //var response = new EmployeeViewModel(employee.Id, employee.FirstName, employee.LastName);
+            var response = employee.Adapt<EmployeeViewModel>();
+
+            return CreatedAtAction(nameof(Get), new { id = response.Id }, response); // 생성된 직원 정보 반환
+        } 
+        #endregion
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]

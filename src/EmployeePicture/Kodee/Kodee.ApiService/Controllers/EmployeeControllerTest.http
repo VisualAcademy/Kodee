@@ -11,3 +11,23 @@ GET {{HostAddress}}/api/employee/1
 Accept: application/json
 
 ###
+
+POST {{HostAddress}}/api/employee
+Content-Type: application/json
+
+{
+  "FirstName": "John",
+  "LastName": "Doe"
+}
+
+###
+
+POST {{HostAddress}}/api/employee
+Content-Type: application/json
+
+{
+  "FirstName": "Jane",
+  "LastName": "Doe"
+}
+
+###

@@ -63,6 +63,7 @@ namespace Kodee.ApiService.Controllers
 
         #region POST
         // POST api/<EmployeeController>
+        // 새로운 직원을 생성
         [HttpPost]
         [ProducesResponseType(typeof(EmployeeViewModel), StatusCodes.Status201Created)] // 201: 생성된 리소스를 반환
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // 400: 잘못된 요청일 경우
@@ -93,6 +94,7 @@ namespace Kodee.ApiService.Controllers
 
         #region PUT
         // PUT api/<EmployeeController>/5
+        // 기존 직원 정보를 업데이트
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)] // 204: 성공적으로 업데이트하고 콘텐츠 없음
         [ProducesResponseType(StatusCodes.Status404NotFound)] // 404: 요청한 직원이 없을 경우
@@ -134,6 +136,7 @@ namespace Kodee.ApiService.Controllers
         #endregion
 
         // DELETE api/<EmployeeController>/5
+        // 특정 직원 데이터를 삭제
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

@@ -42,3 +42,7 @@ Content-Type: application/json
 }
 
 ###
+
+DELETE {{HostAddress}}/api/employee/3
+
+### 

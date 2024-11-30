@@ -135,11 +135,31 @@ namespace Kodee.ApiService.Controllers
         }
         #endregion
 
+        #region DELETE
         // DELETE api/<EmployeeController>/5
         // 특정 직원 데이터를 삭제
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)] // 204: 성공적으로 삭제하고 콘텐츠 없음
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // 404: 요청한 직원이 없을 경우
+        public async Task<IActionResult> Delete(long id)
         {
-        }
+            // 직원 정보와 관련된 사진 데이터를 포함하여 조회
+            var employee = await _context.Employees
+                .Include(e => e.Photos)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (employee == null)
+                return NotFound(); // 직원이 없으면 404 반환
+
+            // 직원 데이터와 관련된 사진 데이터를 먼저 삭제
+            _context.Photos.RemoveRange(employee.Photos);
+
+            // 직원 데이터 삭제
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // 성공 시 204 반환
+        } 
+        #endregion
     }
 }

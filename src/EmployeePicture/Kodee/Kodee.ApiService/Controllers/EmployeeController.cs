@@ -126,12 +126,12 @@ namespace Kodee.ApiService.Controllers
 
             return NoContent(); // 성공 시 204 반환
         } 
-        #endregion
 
         private bool EmployeeExists(long id)
         {
             return _context.Employees.Any(e => e.Id == id);
         }
+        #endregion
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]

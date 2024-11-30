@@ -88,13 +88,49 @@ namespace Kodee.ApiService.Controllers
             var response = employee.Adapt<EmployeeViewModel>();
 
             return CreatedAtAction(nameof(Get), new { id = response.Id }, response); // 생성된 직원 정보 반환
+        }
+        #endregion
+
+        #region PUT
+        // PUT api/<EmployeeController>/5
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)] // 204: 성공적으로 업데이트하고 콘텐츠 없음
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // 404: 요청한 직원이 없을 경우
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] // 400: 잘못된 요청일 경우
+        public async Task<IActionResult> Put(long id, [FromBody] EmployeeViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 유효성 검사 실패 시 400 반환
+
+            var employee = await _context.Employees.FindAsync(id);
+
+            if (employee == null)
+                return NotFound(); // 직원이 없으면 404 반환
+
+            employee.FirstName = model.FirstName;
+            employee.LastName = model.LastName;
+
+            _context.Entry(employee).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeExists(id))
+                    return NotFound(); // 업데이트 중 직원이 삭제되었을 경우 404 반환
+
+                throw;
+            }
+
+            return NoContent(); // 성공 시 204 반환
         } 
         #endregion
 
-        // PUT api/<EmployeeController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        private bool EmployeeExists(long id)
         {
+            return _context.Employees.Any(e => e.Id == id);
         }
 
         // DELETE api/<EmployeeController>/5

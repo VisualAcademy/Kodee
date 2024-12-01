@@ -46,3 +46,17 @@ Content-Type: application/json
 DELETE {{HostAddress}}/api/employee/3
 
 ### 
+
+### 
+
+GET {{HostAddress}}/api/employee
+Accept: application/json
+Authorization: Basic YWRtaW5AdmlzdWFsYWNhZGVteS5jb206c2VjdXJlcGFzc3dvcmQ=
+
+###
+
+GET {{HostAddress}}/api/employee/5
+Accept: application/json
+Authorization: Basic YWRtaW5AdmlzdWFsYWNhZGVteS5jb206c2VjdXJlcGFzc3dvcmQ=
+
+###

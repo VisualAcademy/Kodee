@@ -1,4 +1,6 @@
 using Kodee.ApiService.Models;
+using Kodee.ApiService.Security;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 // Add services to the container.
+
+// TimeProvider를 서비스로 추가
+builder.Services.AddSingleton(TimeProvider.System);
+
 builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
@@ -29,6 +35,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<EmployeePhotoDbContext>(options => 
     options.UseSqlServer(connectionString));
 
+// 인증 스키마 추가
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +55,7 @@ app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapDefaultEndpoints();
@@ -52,3 +63,9 @@ app.MapDefaultEndpoints();
 app.MapControllers();
 
 app.Run();
+
+//string email = "admin@visualacademy.com";
+//string password = "securepassword";
+//string credentials = $"{email}:{password}";
+//string base64Credentials = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(credentials));
+//Console.WriteLine($"Authorization: Basic {base64Credentials}");

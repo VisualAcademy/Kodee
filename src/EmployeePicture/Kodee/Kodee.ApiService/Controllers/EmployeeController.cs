@@ -1,6 +1,7 @@
 ﻿using Kodee.ApiService.Models;
 using Kodee.ApiService.ViewModels;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kodee.ApiService.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase

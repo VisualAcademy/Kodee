@@ -11,7 +11,10 @@ namespace Kodee.ApiService.Security
         private const string FixedEmail = "admin@visualacademy.com";
         private const string FixedPassword = "securepassword";
 
-        public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder)
+        public BasicAuthenticationHandler(
+            IOptionsMonitor<AuthenticationSchemeOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder) : base(options, logger, encoder)
         {
         }
 

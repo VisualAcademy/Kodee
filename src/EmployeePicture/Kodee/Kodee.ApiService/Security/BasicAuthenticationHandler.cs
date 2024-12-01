@@ -11,16 +11,8 @@ namespace Kodee.ApiService.Security
         private const string FixedEmail = "admin@visualacademy.com";
         private const string FixedPassword = "securepassword";
 
-        private readonly TimeProvider _timeProvider;
-
-        public BasicAuthenticationHandler(
-            IOptionsMonitor<AuthenticationSchemeOptions> options,
-            ILoggerFactory logger,
-            UrlEncoder encoder,
-            TimeProvider timeProvider)
-            : base(options, logger, encoder, null) // ISystemClock 제거
+        public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder)
         {
-            _timeProvider = timeProvider;
         }
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()

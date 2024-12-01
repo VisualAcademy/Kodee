@@ -11,7 +11,7 @@ builder.AddServiceDefaults();
 // Add services to the container.
 
 // TimeProvider를 서비스로 추가
-builder.Services.AddSingleton(TimeProvider.System);
+//builder.Services.AddSingleton(TimeProvider.System);
 
 builder.Services.AddProblemDetails();
 

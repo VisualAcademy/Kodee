@@ -161,6 +161,26 @@ namespace Kodee.ApiService.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent(); // 성공 시 204 반환
+        }
+        #endregion
+
+        #region GetCurrentUserEmail
+        [HttpGet("GetCurrentUserEmail")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // 성공 시 반환 타입과 HTTP 상태 코드 명시
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // 인증되지 않은 경우
+        public IActionResult GetCurrentUserEmail()
+        {
+            // 현재 로그인한 사용자의 이메일 가져오기
+            var userEmail = User.Identity?.Name;
+
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                // 인증되지 않은 경우 401 반환
+                return Unauthorized(new { message = "User is not authenticated." });
+            }
+
+            // JSON으로 이메일 반환
+            return Ok(new { email = userEmail });
         } 
         #endregion
     }

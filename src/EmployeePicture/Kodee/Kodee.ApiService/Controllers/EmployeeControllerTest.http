@@ -60,3 +60,9 @@ Accept: application/json
 Authorization: Basic YWRtaW5AdmlzdWFsYWNhZGVteS5jb206c2VjdXJlcGFzc3dvcmQ=
 
 ###
+
+GET {{HostAddress}}/api/employee/GetCurrentUserEmail
+Accept: application/json
+Authorization: Basic YWRtaW5AdmlzdWFsYWNhZGVteS5jb206c2VjdXJlcGFzc3dvcmQ=
+
+###

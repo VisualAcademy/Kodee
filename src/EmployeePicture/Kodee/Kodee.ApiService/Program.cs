@@ -46,7 +46,7 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi(); // /openapi/{name}.json 엔드포인트 등록
     app.UseSwaggerUI(options => 
         options.SwaggerEndpoint("/openapi/v1.json", "weather api"));
 }
